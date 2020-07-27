@@ -3,20 +3,22 @@ import 'package:todoapp/widgets/task_tile.dart';
 import 'package:todoapp/models/tasks.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({
-    Key key,
-  }) : super(key: key);
+  TaskList({this.tasks});
+  final List<Task> tasks;
 
   @override
   _TaskListState createState() => _TaskListState();
 }
 
 class _TaskListState extends State<TaskList> {
-  List<Task> tasks = [
-    Task(name: "Buy milk"),
-    Task(name: "Buy eggs"),
-    Task(name: "Buy bread"),
-  ];
+  List<Task> tasks;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tasks = widget.tasks;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
