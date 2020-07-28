@@ -10,8 +10,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TasksScreen(),
+    return ChangeNotifierProvider<TaskDataModel>(
+      create: (context) => TaskDataModel(),
+      child: MaterialApp(
+        home: TasksScreen(),
+      ),
     );
   }
 }

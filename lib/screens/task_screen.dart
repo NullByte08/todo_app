@@ -6,20 +6,7 @@ import 'add_task_screen.dart';
 import 'package:todoapp/widgets/task_list.dart';
 import 'package:todoapp/models/tasks.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  bool isChecked = false;
-
-  List<Task> tasks = [
-    Task(name: "Buy milk"),
-    Task(name: "Buy eggs"),
-    Task(name: "Buy bread"),
-  ];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,16 +15,7 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(
-              (newTaskTitle) {
-                print(newTaskTitle);
-                //Provider.of<TaskDataModel>(context).addToTaskList(Task(name: newTaskTitle));
-                setState(() {
-                  tasks.add(Task(name: newTaskTitle));
-                });
-                Navigator.pop(context);
-              },
-            ),
+            builder: (context) => AddTaskScreen(),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -74,7 +52,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "${tasks.length} tasks",
+                  "${Provider.of<TaskDataModel>(context).getTasksCount()} tasks",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -95,8 +73,8 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
               ),
               child: TaskList(
-                tasks: tasks,
-              ),
+//                tasks: Provider.of<TaskDataModel>(context).tasks,
+                  ),
             ),
           )
         ],
